@@ -15,7 +15,6 @@ conda activate spectra_env
 ### Install EProver
 
 ```
-git clone https://github.com/eprover/eprover
 cd eprover
 ./configure --enable-ho
 make rebuild
