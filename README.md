@@ -1,5 +1,8 @@
-# spectra-examples
+# ILBAI Final Project
+Cam Eich and Satyam Patel
 
+## Overview
+This is our final project for Professor Selmer Brinsjord's Intro to Logic-Based AI course in the Fall '25 semester. Our goal is to develop a logical model that represents the rules and constraints of Rush Hour puzzles in first-order logic, then use ShadowProver to automatically solve given puzzles.
 
 ## Installation 
 
