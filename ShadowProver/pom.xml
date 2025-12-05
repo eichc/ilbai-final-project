@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>org.rairlab</groupId>
+    <artifactId>prover</artifactId>
+    <version>1.40</version>
+    <packaging>jar</packaging>
+
+    <name> Shadow Prover</name>
+    <description> 
+        A prover for logics more expressive than first-order logic building
+        (quantified modal logic, second-order logic etc).
+    </description>
+    <url>https://github.com/RAIRLab/ShadowProver</url>
+
+    <licenses>
+        <license>
+            <name>MIT</name>
+            <url>https://opensource.org/licenses/MIT</url>
+        </license>
+    </licenses>
+        
+    <properties>
+        <!-- This tells maven to build with Java 8 for Java 8-->
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+
+        <!-- If I have to keep waiting for tests I am going to lose it -James -->
+        <maven.test.skip>true</maven.test.skip>
+
+        <!-- Set the encoding so builds aren't platform dependent -->
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+    </properties>
+
+    
+    <build> 
+        <plugins> <!--plugins run durring the build -->
+            <plugin> 
+                <!-- This plugin builds our exacuable jars-->
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <version>2.4</version>
+
+                <!-- Aditional Executable Jars with real manifests that we're building -->
+                <executions>
+                    <!-- DEADCODE maybe, sandbox does not appear to differ in anyway from server -->
+                    <execution>
+                        <id>sandbox</id>
+                        <configuration>
+                            <archive>
+                                <manifest>
+                                    <mainClass>org.rairlab.shadow.prover.Py4JServer</mainClass>
+                                </manifest>
+                            </archive>
+                            <descriptorRefs>
+                                <descriptorRef>jar-with-dependencies</descriptorRef>
+                            </descriptorRefs>
+                            <finalName>sandbox</finalName>
+                        </configuration>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                    </execution>
+
+                    <!-- The Py4j server executable -->
+                    <execution>
+                        <id>server</id>
+                        <configuration>
+                            <archive>
+                                <manifest>
+                                    <addClasspath>true</addClasspath>
+                                    <mainClass>org.rairlab.shadow.prover.Py4JServer</mainClass>
+                                </manifest>
+                            </archive>
+                            <descriptorRefs>
+                                <descriptorRef>jar-with-dependencies</descriptorRef>
+                            </descriptorRefs>
+                            <finalName>server</finalName>
+                        </configuration>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+
+    <dependencies>
+        <!-- The Lisp interprter that is used to run snark -->
+        <dependency>
+            <groupId>org.armedbear.lisp</groupId>
+            <artifactId>abcl</artifactId>
+            <version>1.0.1</version>
+        </dependency>
+
+        <!-- Parses "extensible data notation" a subset of the clojure syntax -->
+        <!-- Appears to be made use of extensibly for parsing shadowprover problems -->
+        <!--https://github.com/bpsm/edn-java-->
+        <dependency>
+            <groupId>us.bpsm</groupId>
+            <artifactId>edn-java</artifactId>
+            <version>0.4.6</version>
+        </dependency>
+
+        <!-- Java extensions (Kind of like boost for Java) https://commons.apache.org/proper/commons-lang/ -->
+        <!-- https://mvnrepository.com/artifact/org.apache.commons/commons-lang3 -->
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>3.4</version>
+        </dependency>
+
+        <!-- For colored printing, apparently not cross platform -->
+        <!-- https://mvnrepository.com/artifact/com.diogonunes/JCDP -->
+        <dependency>
+            <groupId>com.diogonunes</groupId>
+            <artifactId>JCDP</artifactId>
+            <version>2.0.3.1</version>
+        </dependency>
+
+        <!-- Clojure Programming Language support for problem
+            representations and hyperlog-->
+        <dependency>
+            <groupId>org.clojure</groupId>
+            <artifactId>clojure</artifactId>
+            <version>1.10.0</version>
+        </dependency>
+
+        <!-- Used for the python interface-->
+        <!-- https://mvnrepository.com/artifact/net.sf.py4j/py4j -->
+        <dependency>
+            <groupId>net.sf.py4j</groupId>
+            <artifactId>py4j</artifactId>
+            <version>0.8.1</version>
+        </dependency>
+
+        <!-- Used for unit testing -->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.8.2</version>
+        </dependency>
+
+        <!-- yet another testing framework because why not -->
+        <!-- https://testng.org/doc/ -->
+        <dependency>
+            <groupId>org.testng</groupId>
+            <artifactId>testng</artifactId>
+            <version>7.5</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+</project>

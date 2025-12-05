@@ -5,11 +5,48 @@
 venv/
 env/
 .venv/
+spectra_env/
 
 # Python cache
 __pycache__/
 *.py[cod]
 *$py.class
+
+# Java/Maven build artifacts
+target/
+*.class
+*.jar
+*.war
+*.ear
+
+# Maven local repo artifacts (keep source)
+.m2/
+
+# EProver build artifacts
+eprover/**/*.o
+eprover/**/*.a
+eprover/PROVER/eprover-ho
+eprover/PROVER/e_ltb_runner
+eprover/PROVER/e_stratpar
+eprover/PROVER/e_deduction_server
+eprover/PROVER/e_axfilter
+eprover/PROVER/classify_problem
+eprover/PROVER/epatternize
+eprover/PROVER/e_client
+eprover/PROVER/e_server
+eprover/PROVER/direct_examples
+eprover/PROVER/epclanalyse
+eprover/PROVER/epclextract
+eprover/PROVER/checkproof
+eprover/PROVER/eground
+eprover/PROVER/enormalizer
+eprover/PROVER/edpll
+eprover/PROVER/epcllemma
+eprover/PROVER/ekb_*
+eprover/SIMPLE_APPS/ex_commandline
+eprover/SIMPLE_APPS/term2dag
+eprover/EXTERNAL/CSSCPA_filter
+eprover/lib/**/*.a
 
 # OS files
 .DS_Store
@@ -18,3 +55,4 @@ Thumbs.db
 # IDE
 .vscode/
 .idea/
+*.iml
