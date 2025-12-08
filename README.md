@@ -68,3 +68,16 @@ cd ..
 
 # Should output: E 3.0.1-ho Countess Grey
 ```
+
+## Running Puzzles
+
+Use the provided Python runner script to solve Rush Hour puzzles:
+
+```bash
+python run_puzzle.py problems/rush_hour_beginner_1.clj
+```
+
+The runner script automatically:
+- Sets the `EPROVER_HOME` environment variable
+- Validates all required paths
+- Runs Spectra with the specified puzzle file
