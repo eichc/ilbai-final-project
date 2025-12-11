@@ -19,13 +19,13 @@
     ]
 
     :actions [
-        (define-action moveRight [?v ?x ?x1 ?y] {
+        (define-action moveRight [?v ?x ?newx ?y] {
             :preconditions [
                 (At ?v ?x ?y)
-                (NextX ?x ?x1)
+                (NextX ?x ?newx)
             ]
             :additions [
-                (At ?v ?x1 ?y)
+                (At ?v ?newx ?y)
             ]
             :deletions [
                 (At ?v ?x ?y)
@@ -38,8 +38,7 @@
     ]
 
     :goal [
-        (At R x2 y0)
+        (At R x1 y0)
     ]
                            
 }
-
