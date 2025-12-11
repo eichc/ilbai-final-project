@@ -110,6 +110,7 @@ dependencies:
     - edn-format==0.7.5
     - fastjsonschema==2.20.0
     - fuzzywuzzy==0.18.0
+    - python-Levenshtein==0.25.1
     - h11==0.16.0
     - httpcore==1.0.9
     - httpx==0.28.1
