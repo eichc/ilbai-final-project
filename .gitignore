@@ -12,6 +12,7 @@ spectra_env/
 # EProver build artifacts
 eprover/**/*.o
 eprover/**/*.a
+eprover/**/Makefile.dependencies
 eprover/PROVER/eprover-ho
 eprover/PROVER/e_ltb_runner
 eprover/PROVER/e_stratpar
