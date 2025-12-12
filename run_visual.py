@@ -95,6 +95,7 @@ def apply_action(state, action_str):
 def main():
     parser = argparse.ArgumentParser(description='Run Rush Hour puzzle solver with visualization.')
     parser.add_argument('puzzle_file', help='Path to the python puzzle file (e.g., problems/rush_hour.py)')
+    parser.add_argument('--steps', action='store_true', help='Print the board after each action step')
     args = parser.parse_args()
 
     if not os.path.exists(args.puzzle_file):
@@ -128,8 +129,10 @@ def main():
             print("\nPlan found:")
             current_state = puzzle.start
             for step in plan:
-                print(f"Action: {step}")
+                print(f"\nAction: {step}")
                 current_state = apply_action(current_state, str(step))
+                if args.steps:
+                    print_board(current_state, puzzle.goal)
             
             print("\nFinal State:")
             print_board(current_state, puzzle.goal)
