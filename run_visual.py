@@ -22,8 +22,8 @@ def parse_tile(tile_str):
     # t12 -> 12
     return int(tile_str[1:])
 
-def print_board(state):
-    grid = [['.' for _ in range(4)] for _ in range(4)]
+def print_board(state, goal=None):
+    grid = [['.' for _ in range(5)] for _ in range(5)]
     
     # Extract (on Car Tile) predicates
     for fact in state:
@@ -35,17 +35,25 @@ def print_board(state):
             tile = match.group(2)
             try:
                 idx = parse_tile(tile)
-                if 0 <= idx < 16:
-                    row = idx // 4
-                    col = idx % 4
+                if 0 <= idx < 25:
+                    row = idx // 5
+                    col = idx % 5
                     grid[row][col] = car[0] # First letter of car
             except ValueError:
                 pass
             
-    print("-" * 17)
-    for row in grid:
-        print("| " + " | ".join(row) + " |")
-        print("-" * 17)
+    # Goal is always the rightmost side of the middle row (row 2)
+    goal_row = 2
+
+    print("-" * 21)
+    for i, row in enumerate(grid):
+        if i == 2:  # Goal row
+            # Remove the right border to show exit
+            line = "| " + " | ".join(row) + "   <-- Goal"
+        else:
+            line = "| " + " | ".join(row) + " |"
+        print(line)
+        print("-" * 21)
 
 def apply_action(state, action_str):
     # Action: (move ?c ?t1 ?t2 ?t3 ?dir)
@@ -100,7 +108,7 @@ def main():
         sys.exit(1)
 
     print("Starting State:")
-    print_board(puzzle.start)
+    print_board(puzzle.start, puzzle.goal)
     
     print("\nRunning Spectra...")
     try:
@@ -124,7 +132,7 @@ def main():
                 current_state = apply_action(current_state, str(step))
             
             print("\nFinal State:")
-            print_board(current_state)
+            print_board(current_state, puzzle.goal)
         else:
             print("\nNo plan found.")
             
