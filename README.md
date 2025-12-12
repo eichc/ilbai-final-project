@@ -76,3 +76,10 @@ python <puzzle_name>.py
 ```
 
 This script defines the puzzle domain, background knowledge, and actions directly in Python and uses the Spectra planner to find a solution.
+
+## Resources
+
+- **EProver**: https://github.com/eprover/eprover
+- **ShadowProver**: https://github.com/RAIRLab/ShadowProver
+- **Spectra**: https://github.com/RAIRLab/Spectra
+- **Spectra Examples (starter repo)**: https://github.com/naveensundarg/spectra-examples
